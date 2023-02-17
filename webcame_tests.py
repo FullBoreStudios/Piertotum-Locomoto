@@ -1,17 +1,21 @@
 import cv2
 import numpy as np
 import webbrowser
+import pyautogui
+
+# vars
+ready_to_cast = True
 
 cap = cv2.VideoCapture(0) # 0 is the index of the default camera
 
 # Define a "Z" pattern
-pattern = np.array([(-0.4, -0.4), (0.4, -0.4), (0.4, 0.0), (-0.4, 0.0), (-0.4, 0.4), (0.4, 0.4)])
+pattern = np.array([(0.0, 0.4), (0.0, 0.0), (0.0, -0.2)])
 
 # Define a maximum distance from each point on the pattern for a match
-max_distance = 30
+max_distance = 50
 
 # Set the contrast level (value between 0 and 100)
-contrast_level = 70
+contrast_level = 10
 
 # Define a list to track the activated points on the pattern
 activated_points = []
@@ -25,8 +29,10 @@ def activated_a_point(a_point):
 
 def spell_is_cast():
     print("SPELL CAST")
-    url = "https://media3.giphy.com/media/eax0rh3OERAYg/giphy.gif?cid=ecf05e47tncjm1pc7b8f79db5m2bjjl0alowlozizgru3y2f&rid=giphy.gif&ct=g"
-    webbrowser.open(url)
+    pyautogui.press('R')
+
+
+
 
 while True:
     ret, frame = cap.read()
@@ -85,18 +91,9 @@ while True:
     # Check if the pattern has been fully activated
     if len(activated_points) == len(pattern):
         spell_cast = spell_is_cast()
-        break
+        activated_points = []
+        
 
     # break with "Q"
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
-
-
-    # Check if the pattern has been fully activated
-    if len(activated_points) == len(pattern):
-        spell_cast = spell_is_cast()
-    
-
-        # Release the capture and close the window
-        cap.release()
-        cv2.destroyAllWindows()
