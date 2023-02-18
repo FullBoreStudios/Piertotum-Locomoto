@@ -3,16 +3,13 @@ import numpy as np
 import webbrowser
 import pyautogui
 
-# vars
-ready_to_cast = True
-
 cap = cv2.VideoCapture(0) # 0 is the index of the default camera
 
-# Define a "Z" pattern
-pattern = np.array([(0.0, 0.4), (0.0, 0.0), (0.0, -0.2)])
+# Define a "one point" pattern
+pattern = np.array([(0.0, 0.0)])
 
 # Define a maximum distance from each point on the pattern for a match
-max_distance = 50
+max_distance = 150
 
 # Set the contrast level (value between 0 and 100)
 contrast_level = 10
@@ -29,8 +26,7 @@ def activated_a_point(a_point):
 
 def spell_is_cast():
     print("SPELL CAST")
-    pyautogui.press('R')
-
+    pyautogui.press('R') # Does Revelio in Hogwarts Legacy Game
 
 
 
@@ -91,6 +87,8 @@ while True:
     # Check if the pattern has been fully activated
     if len(activated_points) == len(pattern):
         spell_cast = spell_is_cast()
+        
+        # Reset activated points
         activated_points = []
         
 
