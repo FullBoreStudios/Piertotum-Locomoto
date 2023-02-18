@@ -2,6 +2,8 @@
 
 Piertotum-Locomoto is a hardware and software project that enables custom interactions using a wand or device with an IR led point or reflector.
 
+![Piertotum-Locomoto in Hogwarts](harrrrry.gif)
+
 We are using a webcam with its IR filter removed and replaced with a piece of exposed film to filter out all other light spectrums.
 
 ## Example
